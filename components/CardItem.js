@@ -5,11 +5,12 @@ import {
   PlusIcon,
   DotsVerticalIcon,
   ChatAlt2Icon,
-  PaperClipIcon,
+  XCircleIcon,
+  PencilIcon,
 } from "@heroicons/react/outline";
 import { Draggable } from "react-beautiful-dnd";
 
-function CardItem({ data, index }) {
+function CardItem({ data, index, oIndex}) {
   return (
     <Draggable index={index} draggableId={data.id.toString()}>
       {(provided) => (
@@ -17,11 +18,11 @@ function CardItem({ data, index }) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="bg-white rounded-md p-3 m-3 mt-0 last:mb-0"
+          className="bg-blue-100 rounded-md p-3 m-3 mt-0 last:mb-0"
         >
           <label
             className={`bg-gradient-to-r
-              px-2 py-1 rounded text-white text-sm
+              px-6 py-1 rounded text-white text-lg
               ${
                 data.priority === 0
                   ? "from-blue-600 to-blue-400"
@@ -32,45 +33,24 @@ function CardItem({ data, index }) {
               `}
           >
             {data.priority === 0
-              ? "Low Priority"
+              ? "COMUNICA: " + oIndex
               : data.priority === 1
               ? "Medium Priority"
               : "High Priority"}
           </label>
-          <h5 className="text-md my-3 text-lg leading-6">{data.title}</h5>
+
+          <h3 className="text-xl my-3 leading-6 text-blue-700">{data.title}</h3>
           <div className="flex justify-between">
             <div className="flex space-x-2 items-center">
               <span className="flex space-x-1 items-center">
-                <ChatAlt2Icon className="w-4 h-4 text-gray-500" />
-                <span>{data.chat}</span>
+                <PencilIcon className="w-6 h-6 cursor-pointer text-gray-500 hover:text-blue-500" />
               </span>
-              <span className="flex space-x-1 items-center">
-                <PaperClipIcon className="w-4 h-4 text-gray-500" />
-                <span>{data.attachment}</span>
-              </span>
+
             </div>
 
             <ul className="flex space-x-3">
-              {data.assignees.map((ass, index) => {
-                return (
-                  <li key={index}>
-                    <Image
-                      src={ass.avt}
-                      width="36"
-                      height="36"
-                      objectFit="cover"
-                      className=" rounded-full "
-                    />
-                  </li>
-                );
-              })}
               <li>
-                <button
-                  className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center
-                    rounded-full"
-                >
-                  <PlusIcon className="w-5 h-5 text-gray-500" />
-                </button>
+                  <XCircleIcon className="w-10 h-10 text-gray-500 cursor-pointer hover:text-red-500" onClick={()=>{console.log()}}/>
               </li>
             </ul>
           </div>

@@ -26,7 +26,7 @@ export default function Home() {
   const [selectedBoard, setSelectedBoard] = useState(0);
 
   useEffect(() => {
-    if (process.browser) {
+    if (typeof window !== 'undefined') {
       setReady(true);
     }
   }, []);
@@ -80,41 +80,14 @@ export default function Home() {
         {/* Board header */}
         <div className="flex flex-initial justify-between">
           <div className="flex items-center">
-            <h4 className="text-4xl font-bold text-gray-600">Studio Board</h4>
+            <h4 className="text-4xl font-bold text-blue-600">TN1</h4>
             <ChevronDownIcon
               className="w-9 h-9 text-gray-500 rounded-full
-            p-1 bg-white ml-5 shadow-xl"
+            p-1 bg-white ml-5 shadow-xl cursor-pointer"
             />
           </div>
 
           <ul className="flex space-x-3">
-            <li>
-              <Image
-                src="https://randomuser.me/api/portraits/men/75.jpg"
-                width="36"
-                height="36"
-                objectFit="cover"
-                className=" rounded-full "
-              />
-            </li>
-            <li>
-              <Image
-                src="https://randomuser.me/api/portraits/men/76.jpg"
-                width="36"
-                height="36"
-                objectFit="cover"
-                className=" rounded-full "
-              />
-            </li>
-            <li>
-              <Image
-                src="https://randomuser.me/api/portraits/men/78.jpg"
-                width="36"
-                height="36"
-                objectFit="cover"
-                className=" rounded-full "
-              />
-            </li>
             <li>
               <button
                 className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center
@@ -145,7 +118,7 @@ export default function Home() {
                             ${snapshot.isDraggingOver && "bg-green-100"}`}
                           >
                             <span
-                              className="w-full h-1 bg-gradient-to-r from-pink-700 to-red-200
+                              className="w-full h-1 bg-gradient-to-r bg-blue-400
                           absolute inset-x-0 top-0"
                             ></span>
                             <h4 className=" p-3 flex justify-between items-center mb-2">
@@ -164,6 +137,7 @@ export default function Home() {
                                       key={item.id}
                                       data={item}
                                       index={iIndex}
+                                      oIndex={board.out}
                                       className="m-3"
                                     />
                                   );
@@ -175,7 +149,7 @@ export default function Home() {
                               showForm && selectedBoard === bIndex ? (
                                 <div className="p-3">
                                   <textarea className="border-gray-300 rounded focus:ring-purple-400 w-full" 
-                                  rows={3} placeholder="Task info" 
+                                  rows={1} placeholder="Nome do reporter" 
                                   data-id={bIndex}
                                   onKeyDown={(e) => onTextAreaKeyPress(e)}/>
                                 </div>
@@ -184,7 +158,7 @@ export default function Home() {
                                   className="flex justify-center items-center my-3 space-x-2 text-lg"
                                   onClick={() => {setSelectedBoard(bIndex); setShowForm(true);}}
                                 >
-                                  <span>Add task</span>
+                                  <span>NOVO LINK</span>
                                   <PlusCircleIcon className="w-5 h-5 text-gray-500" />
                                 </button>
                               )

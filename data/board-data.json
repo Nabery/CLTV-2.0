@@ -1,41 +1,50 @@
 [{
         "name": "RG1",
-        "out": "DEJ 1",
-        "items": []
+        "out": 1,
+        "dej": "DEJ 1",
+        "items": [
+        ]
     },
     {
         "name": "RG2",
-        "out": "DEJ 2",
+        "out": 2,
+        "dej": "DEJ 2",
         "items": []
     },
     {
         "name": "RG3",
-        "out": "DEJ 3",
+        "out": 3,
+        "dej": "DEJ 3",
         "items": []
     },
     {
         "name": "RG4",
-        "out": "DEJ 4",
+        "out": 4,
+        "dej": "DEJ 4",
         "items": []
     },
     {
         "name": "RD1",
-        "out": "Híbrida",
+        "out":"5",
+        "dej": "",
         "items": []
     },
     {
         "name": "RD2",
-        "out": "Híbrida",
+        "out":"6",
+        "dej": "",
         "items": []
     },
     {
         "name": "RD3",
-        "out": "Híbrida",
+        "out":"7",
+        "dej": "", 
         "items": []
     },
     {
         "name": "RD4",
-        "out": "Híbrida",
+        "out": "8",
+        "dej": "",
         "items": []
     }
 ]

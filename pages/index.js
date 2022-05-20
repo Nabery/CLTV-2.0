@@ -48,6 +48,12 @@ export default function Home() {
     setBoardData(newBoardData);
   };
 
+  const handleDelete = (oIndex, index)=>{
+    boardData[(parseInt(oIndex)-1)].items.splice(index,1)
+    let newBoardData = boardData;
+    setBoardData([...newBoardData])
+  }
+
   const onTextAreaKeyPress = (e) => {
     if(e.keyCode === 13) //Enter
     {
@@ -57,13 +63,11 @@ export default function Home() {
       }
       else {
         const boardId = e.target.attributes['data-id'].value;
+
         const item = {
           id: createGuidId(),
           title: val,
           priority: 0,
-          chat:0,
-          attachment: 0,
-          assignees: []
         }
         let newBoardData = boardData;
         newBoardData[boardId].items.push(item);
@@ -76,29 +80,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="p-10 flex flex-col h-screen">
-        {/* Board header */}
-        <div className="flex flex-initial justify-between">
-          <div className="flex items-center">
-            <h4 className="text-4xl font-bold text-blue-600">TN1</h4>
-            <ChevronDownIcon
-              className="w-9 h-9 text-gray-500 rounded-full
-            p-1 bg-white ml-5 shadow-xl cursor-pointer"
-            />
-          </div>
-
-          <ul className="flex space-x-3">
-            <li>
-              <button
-                className="border border-dashed flex items-center w-9 h-9 border-gray-500 justify-center
-                rounded-full"
-              >
-                <PlusIcon className="w-5 h-5 text-gray-500" />
-              </button>
-            </li>
-          </ul>
-        </div>
-
+      <div className="flex flex-col h-screen">
         {/* Board columns */}
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
@@ -125,11 +107,10 @@ export default function Home() {
                               <span className="text-2xl text-gray-600">
                                 {board.name}
                               </span>
-                              <DotsVerticalIcon className="w-5 h-5 text-gray-500" />
                             </h4>
 
                             <div className="overflow-y-auto overflow-x-hidden h-auto"
-                            style={{maxHeight:'calc(100vh - 290px)'}}>
+                            style={{maxHeight:'calc(100vh - 200px)'}}>
                               {board.items.length > 0 &&
                                 board.items.map((item, iIndex) => {
                                   return (
@@ -139,6 +120,8 @@ export default function Home() {
                                       index={iIndex}
                                       oIndex={board.out}
                                       className="m-3"
+                                      handleDelete = {handleDelete}
+                                      defaultD = {board.dej}
                                     />
                                   );
                                 })}
@@ -148,8 +131,8 @@ export default function Home() {
                             {
                               showForm && selectedBoard === bIndex ? (
                                 <div className="p-3">
-                                  <textarea className="border-gray-300 rounded focus:ring-purple-400 w-full" 
-                                  rows={1} placeholder="Nome do reporter" 
+                                  <textarea className="border-gray-300 rounded focus:ring-blue-400 w-full" 
+                                  rows={1} placeholder="Nome" 
                                   data-id={bIndex}
                                   onKeyDown={(e) => onTextAreaKeyPress(e)}/>
                                 </div>

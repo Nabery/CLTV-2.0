@@ -25,49 +25,49 @@
     },
     {
         "name": "RG5",
-        "out":"5",
+        "out":5,
         "dej": "",
         "items": []
     },
     {
         "name": "RG6",
-        "out":"6",
+        "out":6,
         "dej": "",
         "items": []
     },
     {
         "name": "RG7",
-        "out":"7",
+        "out":7,
         "dej": "", 
         "items": []
     },
     {
         "name": "RG8",
-        "out": "8",
+        "out": 8,
         "dej": "",
         "items": []
     }
     {
         "name": "RD1",
-        "out":"9",
+        "out":9,
         "dej": "",
         "items": []
     },
     {
         "name": "RD2",
-        "out":"10",
+        "out":10,
         "dej": "",
         "items": []
     },
     {
         "name": "RD3",
-        "out":"11",
+        "out":11,
         "dej": "", 
         "items": []
     },
     {
         "name": "RD4",
-        "out": "12",
+        "out": 12,
         "dej": "",
         "items": []
     }

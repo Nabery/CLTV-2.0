@@ -34,7 +34,7 @@ function CardItem({ data, index, oIndex, handleDelete, defaultD}) {
               : "High Priority"}
           </label>
 
-          <h3 className="text-xl my-3 leading-1.6 text-black font-extrabold">{data.title}</h3>
+          <h3 className="text-3xl my-3 leading-1.6 text-black font-extrabold">{data.title}</h3>
           <div className="flex justify-between">
             <div className="flex space-x-2 items-center">
               <span className="flex space-x-1 items-center">

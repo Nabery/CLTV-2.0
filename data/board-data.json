@@ -46,5 +46,29 @@
         "out": "8",
         "dej": "",
         "items": []
+    },
+  {
+        "name": "RD1",
+        "out":"5",
+        "dej": "",
+        "items": []
+    },
+    {
+        "name": "RD2",
+        "out":"6",
+        "dej": "",
+        "items": []
+    },
+    {
+        "name": "RD3",
+        "out":"7",
+        "dej": "", 
+        "items": []
+    },
+    {
+        "name": "RD4",
+        "out": "8",
+        "dej": "",
+        "items": []
     }
 ]

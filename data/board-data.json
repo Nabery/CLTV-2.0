@@ -24,50 +24,50 @@
         "items": []
     },
     {
-        "name": "RD1",
+        "name": "RG5",
         "out":"5",
         "dej": "",
         "items": []
     },
     {
-        "name": "RD2",
+        "name": "RG6",
         "out":"6",
         "dej": "",
         "items": []
     },
     {
-        "name": "RD3",
+        "name": "RG7",
         "out":"7",
         "dej": "", 
         "items": []
     },
     {
-        "name": "RD4",
+        "name": "RG8",
         "out": "8",
         "dej": "",
         "items": []
-    },
-  {
+    }
+    {
         "name": "RD1",
-        "out":"5",
+        "out":"9",
         "dej": "",
         "items": []
     },
     {
         "name": "RD2",
-        "out":"6",
+        "out":"10",
         "dej": "",
         "items": []
     },
     {
         "name": "RD3",
-        "out":"7",
+        "out":11",
         "dej": "", 
         "items": []
     },
     {
         "name": "RD4",
-        "out": "8",
+        "out": "12",
         "dej": "",
         "items": []
     }

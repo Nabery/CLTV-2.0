@@ -1,10 +1,8 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
+import Modal from "../components/Modal";
 import Image from "next/dist/client/image";
 import {
-  ChevronDownIcon,
-  PlusIcon,
-  DotsVerticalIcon,
   PlusCircleIcon,
 } from "@heroicons/react/outline";
 import CardItem from "../components/CardItem";
@@ -13,7 +11,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useEffect, useState } from "react";
 
 function createGuidId() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
@@ -24,6 +22,9 @@ export default function Home() {
   const [boardData, setBoardData] = useState(BoardData);
   const [showForm, setShowForm] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState(0);
+  const [showModal, setShowModal] = useState(0);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -45,29 +46,45 @@ export default function Home() {
       0,
       dragItem
     );
+    dragItem.feedback = boardData[re.destination.droppableId].stdFeedback
     setBoardData(newBoardData);
   };
 
-  const handleDelete = (oIndex, index)=>{
-    boardData[(parseInt(oIndex)-1)].items.splice(index,1)
+  const handleDelete = (oIndex, index) => {
+    boardData[(parseInt(oIndex))].items.splice(index, 1)
     let newBoardData = boardData;
     setBoardData([...newBoardData])
   }
 
+  const handleComm = (oIndex, index) => {
+    setShowModal(true)
+    setX(oIndex)
+    setY(index)
+  }
+
+  const handleHnumber = (hNumber) => {
+    console.log(x)
+    console.log(y)
+    boardData[0].items.feedback = hNumber
+    let newBoardData = boardData
+    console.log(boardData[x].items[y].feedback = "Híbrida " + hNumber);
+    setBoardData([...newBoardData])
+  }
+
+
   const onTextAreaKeyPress = (e) => {
-    if(e.keyCode === 13) //Enter
+    if (e.keyCode === 13) //Enter
     {
       const val = e.target.value;
-      if(val.length === 0) {
+      if (val.length === 0) {
         setShowForm(false);
       }
       else {
         const boardId = e.target.attributes['data-id'].value;
-
         const item = {
           id: createGuidId(),
           title: val,
-          priority: 0,
+          feedback: boardData[boardId].stdFeedback,
         }
         let newBoardData = boardData;
         newBoardData[boardId].items.push(item);
@@ -84,6 +101,11 @@ export default function Home() {
         {/* Board columns */}
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
+            {showModal === true ? (
+              <Modal setShowModal={setShowModal} handleHnumber={handleHnumber}/>
+            ) :
+              (<></>)
+            }
             <div className="grid grid-cols-4 gap-5 my-5">
               {boardData.map((board, bIndex) => {
                 return (
@@ -108,9 +130,8 @@ export default function Home() {
                                 {board.name}
                               </span>
                             </h4>
-
                             <div className="overflow-y-auto overflow-x-hidden h-auto"
-                            style={{maxHeight:'calc(100vh - 200px)'}}>
+                              style={{ maxHeight: 'calc(100vh - 200px)' }}>
                               {board.items.length > 0 &&
                                 board.items.map((item, iIndex) => {
                                   return (
@@ -120,26 +141,27 @@ export default function Home() {
                                       index={iIndex}
                                       oIndex={board.out}
                                       className="m-3"
-                                      handleDelete = {handleDelete}
-                                      defaultD = {board.dej}
+                                      handleDelete={handleDelete}
+                                      comms={item.feedback}
+                                      handleComm={handleComm}
                                     />
                                   );
                                 })}
                               {provided.placeholder}
                             </div>
-                            
+
                             {
                               showForm && selectedBoard === bIndex ? (
                                 <div className="p-3">
-                                  <textarea className="border-gray-300 rounded focus:ring-blue-400 w-full" 
-                                  rows={1} placeholder="Nome" 
-                                  data-id={bIndex}
-                                  onKeyDown={(e) => onTextAreaKeyPress(e)}/>
+                                  <textarea className="border-gray-300 rounded focus:ring-blue-400 w-full"
+                                    rows={1} placeholder="Nome"
+                                    data-id={bIndex}
+                                    onKeyDown={(e) => onTextAreaKeyPress(e)} />
                                 </div>
-                              ): (
+                              ) : (
                                 <button
                                   className="flex justify-center items-center my-3 space-x-2 text-lg"
-                                  onClick={() => {setSelectedBoard(bIndex); setShowForm(true);}}
+                                  onClick={() => { setSelectedBoard(bIndex); setShowForm(true); }}
                                 >
                                   <span>NOVO LINK</span>
                                   <PlusCircleIcon className="w-5 h-5 text-gray-500" />

@@ -10,7 +10,9 @@ export default function MyModal({setShowModal, handleHnumber, setX}) {
     hNumber > 0 ?
     handleHnumber(hNumber)
     :
-    console.log(false)
+    ()=>{
+      
+    }
   }
 
   function openModal() {
@@ -47,13 +49,13 @@ export default function MyModal({setShowModal, handleHnumber, setX}) {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-medium leading-6 text-red-500"
                   >
-                    Usar híbrida?
+                    USAR HÍBRIDA?
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Abaixo estão algumas opções de híbridas cadastradas.
+                    <p className="text-sm text-gray-500 font-bold">
+                      Abaixo estão as opções de híbridas cadastradas. Aperte ESC ou clique em qualquer lugar para sair sem modificar nada
                     </p>
                   </div>
 

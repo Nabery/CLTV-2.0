@@ -48,6 +48,7 @@ export default function Home() {
     );
     dragItem.feedback = boardData[re.destination.droppableId].stdFeedback
     setBoardData(newBoardData);
+    console.log(BoardData)
   };
 
   const handleDelete = (oIndex, index) => {
@@ -63,12 +64,11 @@ export default function Home() {
   }
 
   const handleHnumber = (hNumber) => {
-    console.log(x)
-    console.log(y)
     boardData[0].items.feedback = hNumber
     let newBoardData = boardData
-    console.log(boardData[x].items[y].feedback = "Híbrida " + hNumber);
+    console.log(boardData[x].items[y].feedback = "HIB " + hNumber);
     setBoardData([...newBoardData])
+    console.log(boardData)
   }
 
 

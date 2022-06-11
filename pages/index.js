@@ -1,7 +1,5 @@
-import Head from "next/head";
 import Layout from "../components/Layout";
 import Modal from "../components/Modal";
-import Image from "next/dist/client/image";
 import {
   PlusCircleIcon,
 } from "@heroicons/react/outline";
@@ -30,7 +28,38 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       setReady(true);
     }
+    deletecall()
   }, []);
+
+  const postcall = (data) => {
+    fetch('http://localhost:3333/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  const deletecall = (data) => {
+    fetch('http://localhost:3333/', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 
   const onDragEnd = (re) => {
     if (!re.destination) return;
@@ -47,8 +76,14 @@ export default function Home() {
       dragItem
     );
     dragItem.feedback = boardData[re.destination.droppableId].stdFeedback
-    setBoardData(newBoardData);
-    console.log(BoardData)
+    setBoardData([...newBoardData]);
+    postcall(
+      { 
+         out: re.destination.droppableId,
+         index : dragItem.index,
+         items :[{ name : dragItem.title, feedback: dragItem.feedback}]
+     }
+    )
   };
 
   const handleDelete = (oIndex, index) => {
@@ -66,9 +101,8 @@ export default function Home() {
   const handleHnumber = (hNumber) => {
     boardData[0].items.feedback = hNumber
     let newBoardData = boardData
-    console.log(boardData[x].items[y].feedback = "HIB " + hNumber);
+    boardData[x].items[y].feedback = "HIB " + hNumber;
     setBoardData([...newBoardData])
-    console.log(boardData)
   }
 
 
@@ -102,7 +136,7 @@ export default function Home() {
         {ready && (
           <DragDropContext onDragEnd={onDragEnd}>
             {showModal === true ? (
-              <Modal setShowModal={setShowModal} handleHnumber={handleHnumber}/>
+              <Modal setShowModal={setShowModal} handleHnumber={handleHnumber} />
             ) :
               (<></>)
             }

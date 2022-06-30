@@ -31,8 +31,8 @@ export default function Home() {
     deletecall()
   }, []);
 
-  const postcall = (data) => {
-    fetch('http://localhost:3333/', {
+  const movecall = (data) => {
+    fetch('http://localhost:3333/moves', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -45,12 +45,41 @@ export default function Home() {
         console.error('Error:', error);
       });
   }
+  const postcall = (data)=>{
+      fetch('http://localhost:3333/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+  }
 
-  const deletecall = (data) => {
-    fetch('http://localhost:3333/', {
-      method: 'DELETE',
+  const patchcall = (data)=>{
+    fetch('http://localhost:3333/patch', {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  const deletecall = () => {
+    fetch('http://localhost:3333/delete', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(),
     })
       .then(response => response.json())
       .then(data => {
@@ -77,11 +106,13 @@ export default function Home() {
     );
     dragItem.feedback = boardData[re.destination.droppableId].stdFeedback
     setBoardData([...newBoardData]);
-    postcall(
+    movecall(
       { 
-         out: re.destination.droppableId,
-         index : dragItem.index,
-         items :[{ name : dragItem.title, feedback: dragItem.feedback}]
+         destination: re.destination.droppableId,
+         from: re.source.droppableId,
+         index : re.destination.index,
+         fromindex: re.source.index,
+         items :[{id: dragItem.id, name : dragItem.title, feedback: dragItem.feedback}]
      }
     )
   };
@@ -90,6 +121,7 @@ export default function Home() {
     boardData[(parseInt(oIndex))].items.splice(index, 1)
     let newBoardData = boardData;
     setBoardData([...newBoardData])
+    deletecall()
   }
 
   const handleComm = (oIndex, index) => {
@@ -99,10 +131,16 @@ export default function Home() {
   }
 
   const handleHnumber = (hNumber) => {
-    boardData[0].items.feedback = hNumber
     let newBoardData = boardData
     boardData[x].items[y].feedback = "HIB " + hNumber;
     setBoardData([...newBoardData])
+    patchcall({
+      id: boardData[x].items[y].id,
+      name: boardData[x].items[y].title,
+      where: x,
+      index:y,
+      hnumber: hNumber,
+    })
   }
 
 
@@ -125,6 +163,10 @@ export default function Home() {
         setBoardData(newBoardData);
         setShowForm(false);
         e.target.value = '';
+        postcall({
+          where: boardId, 
+          items: item,
+        })
       }
     }
   }

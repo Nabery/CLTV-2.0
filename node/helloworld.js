@@ -7,6 +7,7 @@ app.use(express.json())
 
 const fs = require('fs');
 const { redirect } = require('next/dist/server/api-utils');
+const { application } = require('express');
 
 let obj = fs.readFile('./data/board-data.json', 'utf8', function (err, data) {
     if (err) throw err; // we'll not consider error handling for now
@@ -31,6 +32,12 @@ app.delete('/delete', (req,res) => {
     })
     return res.status(204).send({message: "Deleted"});
 });
+
+app.put('/put', (req,res)=>{
+    const {where, index} = req.body
+    obj[where].items.splice(index,1)
+    res.send(obj)
+})
 
 app.patch('/patch', (req,res) => {
     const {id, name, where, index, hnumber} = req.body

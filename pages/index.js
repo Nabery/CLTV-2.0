@@ -90,6 +90,21 @@ export default function Home() {
       });
   }
 
+  const putcall= (data) =>{
+    fetch('http://localhost:3333/put', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
   const onDragEnd = (re) => {
     if (!re.destination) return;
     let newBoardData = boardData;
@@ -121,7 +136,8 @@ export default function Home() {
     boardData[(parseInt(oIndex))].items.splice(index, 1)
     let newBoardData = boardData;
     setBoardData([...newBoardData])
-    deletecall()
+    const data = {'where': oIndex,'index': index}
+    putcall(data)
   }
 
   const handleComm = (oIndex, index) => {
@@ -182,7 +198,7 @@ export default function Home() {
             ) :
               (<></>)
             }
-            <div className="grid grid-cols-4 gap-5 my-5">
+            <div className="grid grid-cols-6 gap-5 my-5">
               {boardData.map((board, bIndex) => {
                 return (
                   <div key={board.name}>

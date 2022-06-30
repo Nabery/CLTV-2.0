@@ -32,7 +32,7 @@ export default function Home() {
   }, []);
 
   const movecall = (data) => {
-    fetch('http://localhost:3333/moves', {
+    fetch('http://15.228.145.83:3333/moves', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -46,7 +46,7 @@ export default function Home() {
       });
   }
   const postcall = (data)=>{
-      fetch('http://localhost:3333/post', {
+      fetch('http://15.228.145.83:3333/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -61,7 +61,7 @@ export default function Home() {
   }
 
   const patchcall = (data)=>{
-    fetch('http://localhost:3333/patch', {
+    fetch('http://15.228.145.83:3333/patch', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -76,7 +76,7 @@ export default function Home() {
   }
 
   const deletecall = () => {
-    fetch('http://localhost:3333/delete', {
+    fetch('http://15.228.145.83:3333/delete', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(),
@@ -91,7 +91,7 @@ export default function Home() {
   }
 
   const putcall= (data) =>{
-    fetch('http://localhost:3333/put', {
+    fetch('http://15.228.145.83:3333/put', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

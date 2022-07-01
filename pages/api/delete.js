@@ -1,6 +1,7 @@
 async function deletecall (request,response) {
-
-    response.send(request.body)
+    const { body } = req;
+    
+    response.send(body.name)
 }
 
 export default deletes

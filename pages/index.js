@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
 
   const movecall = (data) => {
-    fetch('http://localhost:3000/api/moves', {
+    fetch('https://cltv-2-0.vercel.app/api/moves', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -45,7 +45,7 @@ export default function Home() {
       });
   }
   const postcall = (data)=>{
-      fetch('http://localhost:3000/api/post', {
+      fetch('https://cltv-2-0.vercel.app/api/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -60,7 +60,7 @@ export default function Home() {
   }
 
   const patchcall = (data)=>{
-    fetch('http://localhost:3000/api/patch', {
+    fetch('https://cltv-2-0.vercel.app/api/patch', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -75,7 +75,7 @@ export default function Home() {
   }
 
   const deletecall = () => {
-    fetch('http://localhost:3000/api/delete', {
+    fetch('https://cltv-2-0.vercel.app/api/delete', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(),
@@ -90,7 +90,7 @@ export default function Home() {
   }
 
   const putcall= (data) =>{
-    fetch('http://localhost:3000/api/put', {
+    fetch('https://cltv-2-0.vercel.app/api/put', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const cors = require("cors")
+const https = require("https")
 
 app.use(cors())
 app.use(express.json())
@@ -53,7 +54,16 @@ app.post('/post', (req,res) => {
     res.send(obj)
 });
 
-
-app.listen(3333, () => {
-    console.log('listening on http://localhost:3333')
-})
+https
+  .createServer(
+		// Provide the private and public key to the server by reading each
+		// file's content with the readFileSync() method.
+    {
+      key: fs.readFileSync("key.pem"),
+      cert: fs.readFileSync("cert.pem"),
+    },
+    app
+  )
+  .listen(3333, () => {
+    console.log("serever is runing at port 3333");
+  });

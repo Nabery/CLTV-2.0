@@ -1,6 +1,6 @@
 async function deletecall (request,response) {
-    const { body } = req;
-    
+    const { body } = request;
+
     response.send(body.name)
 }
 

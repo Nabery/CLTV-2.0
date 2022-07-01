@@ -1,5 +1,8 @@
+import BoardData from "/data/board-data.json";
+
 export default async function handler(req, res) {
-    const { body } = req;
-    return res.send(`Hello ${body.name}, you just parsed the request body!`);
+    const forReturn = BoardData.forEach(function (item) {
+        item.items = []
+    })
+    return res.send({message: "Deleted"});
   }
-  

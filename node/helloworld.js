@@ -53,17 +53,3 @@ app.post('/post', (req,res) => {
     obj[where].items.push(items)
     res.send(obj)
 });
-
-https
-  .createServer(
-		// Provide the private and public key to the server by reading each
-		// file's content with the readFileSync() method.
-    {
-      key: fs.readFileSync("key.pem"),
-      cert: fs.readFileSync("cert.pem"),
-    },
-    app
-  )
-  .listen(3333, () => {
-    console.log("serever is runing at port 3333");
-  });

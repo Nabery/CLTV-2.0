@@ -28,7 +28,6 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       setReady(true);
     }
-    deletecall()
   }, []);
 
   const movecall = (data) => {

@@ -5,6 +5,6 @@ export default async function handler(req, res) {
     let obj = BoardData
 
     response.setHeader('Cache-Control', 's-maxage=10', 'stale-while-revalidate');
-    
-    return res.send(obj);
+
+    return res.send(BoardData);
   }

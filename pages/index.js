@@ -28,6 +28,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       setReady(true);
     }
+    deletecall();
   }, []);
 
   const movecall = (data) => {
@@ -44,6 +45,7 @@ export default function Home() {
         console.error('Error:', error);
       });
   }
+
   const postcall = (data)=>{
       fetch('https://cltv-2-0.vercel.app/api/post', {
         method: 'POST',

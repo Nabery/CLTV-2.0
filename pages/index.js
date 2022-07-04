@@ -28,11 +28,10 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       setReady(true);
     }
-    deletecall();
   }, []);
 
-  const movecall = (data) => {
-    fetch('https://cltv-2-0.vercel.app/api/moves', {
+  const update = (data) => {
+    fetch('http://localhost:3000/api/update', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -46,65 +45,7 @@ export default function Home() {
       });
   }
 
-  const postcall = (data)=>{
-      fetch('https://cltv-2-0.vercel.app/api/post', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-  }
-
-  const patchcall = (data)=>{
-    fetch('https://cltv-2-0.vercel.app/api/patch', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-
-  const deletecall = () => {
-    fetch('https://cltv-2-0.vercel.app/api/delete', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
-
-  const putcall= (data) =>{
-    fetch('https://cltv-2-0.vercel.app/api/put', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }
+ 
 
   const onDragEnd = (re) => {
     if (!re.destination) return;
@@ -122,23 +63,14 @@ export default function Home() {
     );
     dragItem.feedback = boardData[re.destination.droppableId].stdFeedback
     setBoardData([...newBoardData]);
-    movecall(
-      { 
-         destination: re.destination.droppableId,
-         from: re.source.droppableId,
-         index : re.destination.index,
-         fromindex: re.source.index,
-         items :[{id: dragItem.id, name : dragItem.title, feedback: dragItem.feedback}]
-     }
-    )
+    update(boardData)
   };
 
   const handleDelete = (oIndex, index) => {
     boardData[(parseInt(oIndex))].items.splice(index, 1)
     let newBoardData = boardData;
     setBoardData([...newBoardData])
-    const data = {'where': oIndex,'index': index}
-    putcall(data)
+    update(boardData)
   }
 
   const handleComm = (oIndex, index) => {
@@ -151,13 +83,7 @@ export default function Home() {
     let newBoardData = boardData
     boardData[x].items[y].feedback = "HIB " + hNumber;
     setBoardData([...newBoardData])
-    patchcall({
-      id: boardData[x].items[y].id,
-      name: boardData[x].items[y].title,
-      where: x,
-      index:y,
-      hnumber: hNumber,
-    })
+    update(boardData)
   }
 
 
@@ -180,10 +106,7 @@ export default function Home() {
         setBoardData(newBoardData);
         setShowForm(false);
         e.target.value = '';
-        postcall({
-          where: boardId, 
-          items: item,
-        })
+        update(boardData)
       }
     }
   }

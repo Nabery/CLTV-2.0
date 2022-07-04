@@ -1,11 +1,14 @@
-const fs = require('fs')
+// api/hello.js
 
-export default async function handler(req, res) {
-  let obj = req.body
-  //Find the absolute path of the json directory
-  const jsonDirectory = path.join(process.cwd(), 'data');
-  //Read the json data file data.json
-  const test = fs.writeFileSync(jsonDirectory + '/board-data.json', JSON.stringify(obj))
-  //Return the content of the data file in json format
-  res.status(200).json(test);
+import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
+
+export default function handler(req, res) {
+  let obj = req.body;
+  const file = path.join(process.cwd(), 'data', 'board-data.json');
+  const stringified = readFileSync(file, 'utf8');
+
+  fs.writeFileSync( file, obj)
+  res.setHeader('Content-Type', 'application/json');
+  return res.end(stringified);
 }

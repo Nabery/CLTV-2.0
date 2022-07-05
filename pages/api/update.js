@@ -1,7 +1,9 @@
 const fs = require('fs')
 
-export default function updates(req,res) {
+const boardData = require('./data/board-data.json')
+
+export default async function updates(req,res) {
   let obj = req.body
-  const test = fs.writeFileSync('./data/board-data.json', JSON.stringify(obj))
-  res.send(test.toString())
+  fs.writeFile('./data/board-data.json', JSON.stringify(obj))
+  res.send(boardData)
 }

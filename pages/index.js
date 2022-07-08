@@ -31,10 +31,11 @@ export default function Home() {
   }, []);
 
   const update = (data) => {
-    fetch('http://15.228.145.83:3000/api/update', {
+    fetch('http://localhost:3000/api/update', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
+      mode: 'cors'
     })
       .then(response => response.json())
       .then(data => {

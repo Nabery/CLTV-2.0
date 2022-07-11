@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
 
   const update = (data) => {
-    fetch('https://cltv-2-0.vercel.app/pages/api/update', {
+    fetch('https://cltv-2-0.vercel.app/api/update', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),

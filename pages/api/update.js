@@ -1,4 +1,4 @@
-const fs = require('fs');
+
 const axios = require('axios')
 
 export default function createJson (req, res){

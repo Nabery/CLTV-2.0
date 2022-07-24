@@ -18,12 +18,12 @@ function CardItem({ data, index, oIndex, handleDelete, comms, handleComm}) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="bg-blue-100 rounded-md p-3 m-3 mt-0 last:mb-0"
+          className="bg-gradient-to-r from-sky-300 to-sky-400 rounded-md p-3 m-3 mt-0 last:mb-0"
         >
           <label className='text-red-500 text-2xl'> {comms}
           </label>
 
-          <h3 className="text-2xl my-3 leading-1.6 text-black font-bold">{data.title}</h3>
+          <h3 className="text-2xl my-3 leading-1.6 text-white font-bold">{data.title}</h3>
 
           <div className="flex justify-between">
                   <PhoneIcon className="w-12 h-12 text-gray-500 cursor-pointer hover:text-blue-300" onClick={

@@ -6,11 +6,11 @@ export default function createJson (req, res){
 	 const config = {
 	  method: 'post',
 	  mode: 'cors',
-	  url: 'https://getpantry.cloud/apiv1/pantry/0e12a1da-6eeb-4bd9-985c-28217a25f86c/basket/finaldatajson',
+	  url: 'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',
 	  headers: { 
 		'Content-Type': 'application/json'
 	  },
-	  data : {data}
+	  content : {data}
 	 };
 	
 	 axios(config)

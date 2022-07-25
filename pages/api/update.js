@@ -1,21 +1,32 @@
 
-const axios = require('axios')
 
 export default function createJson (req, res){
-     let data = req.body
-	 const config = {
-	  method: 'post',
-	  mode: 'cors',
-	  url: 'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',
-	  headers: { 
-		'Content-Type': 'application/json'
-	  },
-	  content : {data}
-	 };
-	
-	 axios(config)
-	 .then(function (response) {
-	  console.log(JSON.stringify(response.data));
-	  res.send(response.data)
-	 })
+	 
+	 let data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
+
+
+	 fetch(
+		'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',
+		{
+		  method: 'post',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({
+			// the username to be displayed
+			username: 'Anúncios',
+
+			embeds: [{
+
+				"description": Date(),
+				"title": "BDC",
+
+			 fields : data.flat()
+			}
+
+		    ]
+		 })
+	    }
+	  ).then(res => console.log(res.status));
+	  res.send("OK")
 	}

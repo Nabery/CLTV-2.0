@@ -30,13 +30,13 @@ export default function Home() {
     }
   }, []);
 
-  const update = (data) => {
-    fetch('https://cltv-2-0.vercel.app/api/update', {
+  const update = async (data) => {
+    await fetch('http://cltv-2-0.vercel.app/api/update', {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    })
+    }).then(response => console.log(response))
   }
 
  

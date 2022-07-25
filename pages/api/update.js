@@ -2,7 +2,9 @@
 
 export default async function createJson (req, res){
 	 const data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
-
+	 const d = new Date()
+	 let hour = d.getHours()
+	 console.log(hour)
 	 await fetch(
 		'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',
 		{
@@ -17,7 +19,7 @@ export default async function createJson (req, res){
 			embeds: [{
 
 				"description": Date(),
-				"title": "BDC",
+				"title":`Jornal: ${hour <10 ? 'BDC': 'TN'}`,
 
 			 fields : data.flat()
 			}

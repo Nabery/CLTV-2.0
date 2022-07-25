@@ -1,7 +1,6 @@
 
 
 export default function createJson (req, res){
-	 
 	 let data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
 
 

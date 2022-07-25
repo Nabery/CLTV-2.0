@@ -1,8 +1,7 @@
 
 
 export default function createJson (req, res){
-	 let data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
-
+	 const data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
 
 	 fetch(
 		'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',

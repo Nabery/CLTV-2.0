@@ -1,32 +1,21 @@
 
+const axios = require('axios')
 
-export default async function createJson (req, res){
-	 const data = req.body.map(board=> board.items.map(item=> ({name: item.title, value: item.feedback})))
-	 const d = new Date()
-	 let hour = d.getHours()
-	 console.log(hour)
-	 await fetch(
-		'https://discord.com/api/webhooks/1000757256075354182/1z8UUMZLYSzSslDGdKBrsIh2jE9Ra0JL7l3ZawRgSuKplxGjE9O5jownq1R03GoNZ_ap',
-		{
-		  method: 'post',
-		  headers: {
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify({
-			// the username to be displayed
-			username: 'Anúncios',
-
-			embeds: [{
-
-				"description": Date(),
-				"title":`Jornal: ${hour <10 ? 'BDC': 'TN'}`,
-
-			 fields : data.flat()
-			}
-
-		    ]
-		 })
-	    }
-	  ).then(res => console.log(res.status));
-	  res.send("OK")
-	}
+export default function createJson(req, res) {
+	let data = req.body
+	const config = {
+		method: 'post',
+		mode: 'cors',
+		url: 'https://getpantry.cloud/apiv1/pantry/0e12a1da-6eeb-4bd9-985c-28217a25f86c/basket/finaldatajson',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		data: { data }
+	};
+	
+	axios(config)
+		.then(function (response) {
+			console.log(JSON.stringify(response.data));
+			res.send(response.data)
+		})
+}
